@@ -74,7 +74,7 @@ namespace LibreTranslate.Net
             ) //if server doesn't support either language
                 throw new Exception("Server doesn't support this language!");
             var data =
-                $"q={text.Replace(" ", "%20")}&source={fromLang.ToString().ToLower()}&target={toLang.ToString().ToLower()}";
+                $"q={Uri.EscapeDataString(text)}&source={fromLang.ToString().ToLower()}&target={toLang.ToString().ToLower()}";
             wc.Headers.Add("Content-Type: application/x-www-form-urlencoded");
             var response =
                 JsonSerializer.Deserialize<TranslationResponse>(wc.UploadString(Url + "/translate", data));

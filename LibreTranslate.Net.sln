@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibreTranslate.Net", "LibreTranslate.Net\LibreTranslate.Net.csproj", "{0C8182A9-C9CA-4E30-9854-5CAA3F6591AF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibreTranslate.Net.Tests", "LibreTranslate.Net.Tests\LibreTranslate.Net.Tests.csproj", "{46A5A915-B44B-4076-AC77-8593AE727D45}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{0C8182A9-C9CA-4E30-9854-5CAA3F6591AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0C8182A9-C9CA-4E30-9854-5CAA3F6591AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0C8182A9-C9CA-4E30-9854-5CAA3F6591AF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{46A5A915-B44B-4076-AC77-8593AE727D45}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{46A5A915-B44B-4076-AC77-8593AE727D45}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{46A5A915-B44B-4076-AC77-8593AE727D45}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{46A5A915-B44B-4076-AC77-8593AE727D45}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
