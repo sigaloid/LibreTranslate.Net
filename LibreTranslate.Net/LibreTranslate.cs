@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
+using System.Text.Json;
 
 namespace LibreTranslate.Net
 {
@@ -18,15 +20,15 @@ namespace LibreTranslate.Net
         None //Placeholder
     }
 
-    public class LibreTranslate
+    public class Translate
     {
-        public LibreTranslate()
+        public Translate()
         {
             wc = new WebClient();
             LanguageList = new List<Language>();
             Url = "https://libretranslate.com";
             var languages =
-                JsonConvert.DeserializeObject<List<SupportedLanguage>>(
+                JsonSerializer.Deserialize<List<SupportedLanguage>>(
                     wc.DownloadString("https://libretranslate.com/languages"));
             LanguageList.Add(languages.Any(a => a.Code == "en") ? Language.En : Language.None);
             LanguageList.Add(languages.Any(a => a.Code == "ar") ? Language.Ar : Language.None);
@@ -40,13 +42,13 @@ namespace LibreTranslate.Net
             LanguageList.Remove(Language.None); //just in case
         }
 
-        public LibreTranslate(string url)
+        public Translate(string url)
         {
             wc = new WebClient();
             LanguageList = new List<Language>();
             Url = url;
             var languages =
-                JsonConvert.DeserializeObject<List<SupportedLanguage>>(wc.DownloadString($"{url}/languages"));
+                JsonSerializer.Deserialize<List<SupportedLanguage>>(wc.DownloadString($"{url}/languages"));
             LanguageList.Add(languages.Any(a => a.Code == "en") ? Language.En : Language.None);
             LanguageList.Add(languages.Any(a => a.Code == "ar") ? Language.Ar : Language.None);
             LanguageList.Add(languages.Any(a => a.Code == "zh") ? Language.Zh : Language.None);
@@ -63,14 +65,20 @@ namespace LibreTranslate.Net
         private string Url { get; }
         private List<Language> LanguageList { get; }
 
-        public string Translate(Language fromLang, Language toLang, string text)
+        public string TranslateText(Language fromLang, Language toLang, string text)
         {
+            if (fromLang == Language.None || toLang == Language.None)
+                throw new Exception(
+                    "These language structs are not to be used! Take out \"Language.None\" from your code! ");
+            if (!LanguageList.Contains(fromLang) || !LanguageList.Contains(toLang)
+            ) //if server doesn't support either language
+                throw new Exception("Server doesn't support this language!");
             var data =
                 $"q={text.Replace(" ", "%20")}&source={fromLang.ToString().ToLower()}&target={toLang.ToString().ToLower()}";
             wc.Headers.Add("Content-Type: application/x-www-form-urlencoded");
             var response =
-                JsonConvert.DeserializeObject<TranslationResponse>(wc.UploadString(Url + "/translate", data));
-            return response.TranslatedText;
+                JsonSerializer.Deserialize<TranslationResponse>(wc.UploadString(Url + "/translate", data));
+            return response.translatedText;
         }
 
         public List<Language> SupportedLanguages()
@@ -89,8 +97,8 @@ namespace LibreTranslate.Net
         public string Code { get; }
     }
 
-    class TranslationResponse
+    internal class TranslationResponse
     {
-        public string TranslatedText { get; set; }
+        public string translatedText { get; set; }
     }
 }
