@@ -25,40 +25,37 @@ namespace LibreTranslate.Net
         public Translate()
         {
             wc = new WebClient();
-            LanguageList = new List<Language>();
+            LanguageList = new List<Language>() {Language.None};
             Url = "https://libretranslate.com";
-            var languages =
-                JsonSerializer.Deserialize<List<SupportedLanguage>>(
-                    wc.DownloadString("https://libretranslate.com/languages"));
-            LanguageList.Add(languages.Any(a => a.Code == "en") ? Language.En : Language.None);
-            LanguageList.Add(languages.Any(a => a.Code == "ar") ? Language.Ar : Language.None);
-            LanguageList.Add(languages.Any(a => a.Code == "zh") ? Language.Zh : Language.None);
-            LanguageList.Add(languages.Any(a => a.Code == "fr") ? Language.Fr : Language.None);
-            LanguageList.Add(languages.Any(a => a.Code == "de") ? Language.De : Language.None);
-            LanguageList.Add(languages.Any(a => a.Code == "it") ? Language.It : Language.None);
-            LanguageList.Add(languages.Any(a => a.Code == "pt") ? Language.Pt : Language.None);
-            LanguageList.Add(languages.Any(a => a.Code == "ru") ? Language.Ru : Language.None);
-            LanguageList.Add(languages.Any(a => a.Code == "es") ? Language.Es : Language.None);
-            LanguageList.Remove(Language.None); //just in case
+            var languages = wc.DownloadString("https://libretranslate.com/languages");
+            LanguageList.Add(languages.Contains("en") ? Language.En : Language.None);
+            LanguageList.Add(languages.Contains("ar") ? Language.Ar : Language.None);
+            LanguageList.Add(languages.Contains("zh") ? Language.Zh : Language.None);
+            LanguageList.Add(languages.Contains("fr") ? Language.Fr : Language.None);
+            LanguageList.Add(languages.Contains("de") ? Language.De : Language.None);
+            LanguageList.Add(languages.Contains("it") ? Language.It : Language.None);
+            LanguageList.Add(languages.Contains("pt") ? Language.Pt : Language.None);
+            LanguageList.Add(languages.Contains("ru") ? Language.Ru : Language.None);
+            LanguageList.Add(languages.Contains("es") ? Language.Es : Language.None);
+            LanguageList.RemoveAll(a=>a.Equals(Language.None)); //just in case
         }
 
         public Translate(string url)
         {
             wc = new WebClient();
-            LanguageList = new List<Language>();
+            LanguageList = new List<Language>() {Language.None};
             Url = url;
-            var languages =
-                JsonSerializer.Deserialize<List<SupportedLanguage>>(wc.DownloadString($"{url}/languages"));
-            LanguageList.Add(languages.Any(a => a.Code == "en") ? Language.En : Language.None);
-            LanguageList.Add(languages.Any(a => a.Code == "ar") ? Language.Ar : Language.None);
-            LanguageList.Add(languages.Any(a => a.Code == "zh") ? Language.Zh : Language.None);
-            LanguageList.Add(languages.Any(a => a.Code == "fr") ? Language.Fr : Language.None);
-            LanguageList.Add(languages.Any(a => a.Code == "de") ? Language.De : Language.None);
-            LanguageList.Add(languages.Any(a => a.Code == "it") ? Language.It : Language.None);
-            LanguageList.Add(languages.Any(a => a.Code == "pt") ? Language.Pt : Language.None);
-            LanguageList.Add(languages.Any(a => a.Code == "ru") ? Language.Ru : Language.None);
-            LanguageList.Add(languages.Any(a => a.Code == "es") ? Language.Es : Language.None);
-            LanguageList.Remove(Language.None);
+            var languages = wc.DownloadString($"{url}/languages");
+            LanguageList.Add(languages.Contains("en") ? Language.En : Language.None);
+            LanguageList.Add(languages.Contains("ar") ? Language.Ar : Language.None);
+            LanguageList.Add(languages.Contains("zh") ? Language.Zh : Language.None);
+            LanguageList.Add(languages.Contains("fr") ? Language.Fr : Language.None);
+            LanguageList.Add(languages.Contains("de") ? Language.De : Language.None);
+            LanguageList.Add(languages.Contains("it") ? Language.It : Language.None);
+            LanguageList.Add(languages.Contains("pt") ? Language.Pt : Language.None);
+            LanguageList.Add(languages.Contains("ru") ? Language.Ru : Language.None);
+            LanguageList.Add(languages.Contains("es") ? Language.Es : Language.None);
+            LanguageList.RemoveAll(a=>a.Equals(Language.None));
         }
 
         private WebClient wc { get; }
@@ -72,7 +69,8 @@ namespace LibreTranslate.Net
                     "These language structs are not to be used! Take out \"Language.None\" from your code! ");
             if (!LanguageList.Contains(fromLang) || !LanguageList.Contains(toLang)
             ) //if server doesn't support either language
-                throw new Exception("Server doesn't support this language!");
+                throw new Exception($"Server doesn't support this language! {string.Join(',',LanguageList.ToArray())}");
+            
             var data =
                 $"q={Uri.EscapeDataString(text)}&source={fromLang.ToString().ToLower()}&target={toLang.ToString().ToLower()}";
             wc.Headers.Add("Content-Type: application/x-www-form-urlencoded");

@@ -16,11 +16,8 @@ namespace LibreTranslate.Net.Tests
             var translate = new Translate();
             string english = "Hello World!";
             string spanish = translate.TranslateText(Language.En, Language.Es, english);
-            Assert.Equals(spanish, "¡Hola Mundo!");
-        }
-        public void Test2()
-        {
-            var translate = new Translate();
+            Assert.AreEqual(spanish, "¡Hola Mundo!");
+            
             Assert.True(translate.SupportedLanguages().Contains(Language.En));
             Assert.True(translate.SupportedLanguages().Contains(Language.Ar));
             Assert.True(translate.SupportedLanguages().Contains(Language.Zh));
@@ -31,6 +28,8 @@ namespace LibreTranslate.Net.Tests
             Assert.True(translate.SupportedLanguages().Contains(Language.Ru));
             Assert.True(translate.SupportedLanguages().Contains(Language.Es));
             //assumes server has all languages available!
+
         }
+   
     }
 }
