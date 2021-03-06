@@ -27,12 +27,12 @@ var translate = new Translate("https://server_url");
 ### Language codes
 Language|Struct
 -|-
-English|Language.En
-Arabic|Language.Ar
-Chinese|Language.Zh
-French|Language.Fr
-German|Language.De
-Italian|Language.It
-Portuguese|Language.Pt
-Russian|Language.Ru
-Spanish|Language.Es
+English|`Language.En`
+Arabic|`Language.Ar`
+Chinese|`Language.Zh`
+French|`Language.Fr`
+German|`Language.De`
+Italian|`Language.It`
+Portuguese|`Language.Pt`
+Russian|`Language.Ru`
+Spanish|`Language.Es`
