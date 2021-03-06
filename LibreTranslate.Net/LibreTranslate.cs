@@ -28,15 +28,15 @@ namespace LibreTranslate.Net
             LanguageList = new List<Language>() {Language.None};
             Url = "https://libretranslate.com";
             var languages = wc.DownloadString("https://libretranslate.com/languages");
-            LanguageList.Add(languages.Contains("en") ? Language.En : Language.None);
-            LanguageList.Add(languages.Contains("ar") ? Language.Ar : Language.None);
-            LanguageList.Add(languages.Contains("zh") ? Language.Zh : Language.None);
-            LanguageList.Add(languages.Contains("fr") ? Language.Fr : Language.None);
-            LanguageList.Add(languages.Contains("de") ? Language.De : Language.None);
-            LanguageList.Add(languages.Contains("it") ? Language.It : Language.None);
-            LanguageList.Add(languages.Contains("pt") ? Language.Pt : Language.None);
-            LanguageList.Add(languages.Contains("ru") ? Language.Ru : Language.None);
-            LanguageList.Add(languages.Contains("es") ? Language.Es : Language.None);
+            LanguageList.Add(languages.Contains("\"en\"") ? Language.En : Language.None);
+            LanguageList.Add(languages.Contains("\"ar\"") ? Language.Ar : Language.None);
+            LanguageList.Add(languages.Contains("\"zh\"") ? Language.Zh : Language.None);
+            LanguageList.Add(languages.Contains("\"fr\"") ? Language.Fr : Language.None);
+            LanguageList.Add(languages.Contains("\"de\"") ? Language.De : Language.None);
+            LanguageList.Add(languages.Contains("\"it\"") ? Language.It : Language.None);
+            LanguageList.Add(languages.Contains("\"pt\"") ? Language.Pt : Language.None);
+            LanguageList.Add(languages.Contains("\"ru\"") ? Language.Ru : Language.None);
+            LanguageList.Add(languages.Contains("\"es\"") ? Language.Es : Language.None);
             LanguageList.RemoveAll(a=>a.Equals(Language.None)); //just in case
         }
 
@@ -46,15 +46,15 @@ namespace LibreTranslate.Net
             LanguageList = new List<Language>() {Language.None};
             Url = url;
             var languages = wc.DownloadString($"{url}/languages");
-            LanguageList.Add(languages.Contains("en") ? Language.En : Language.None);
-            LanguageList.Add(languages.Contains("ar") ? Language.Ar : Language.None);
-            LanguageList.Add(languages.Contains("zh") ? Language.Zh : Language.None);
-            LanguageList.Add(languages.Contains("fr") ? Language.Fr : Language.None);
-            LanguageList.Add(languages.Contains("de") ? Language.De : Language.None);
-            LanguageList.Add(languages.Contains("it") ? Language.It : Language.None);
-            LanguageList.Add(languages.Contains("pt") ? Language.Pt : Language.None);
-            LanguageList.Add(languages.Contains("ru") ? Language.Ru : Language.None);
-            LanguageList.Add(languages.Contains("es") ? Language.Es : Language.None);
+            LanguageList.Add(languages.Contains("\"en\"") ? Language.En : Language.None);
+            LanguageList.Add(languages.Contains("\"ar\"") ? Language.Ar : Language.None);
+            LanguageList.Add(languages.Contains("\"zh\"") ? Language.Zh : Language.None);
+            LanguageList.Add(languages.Contains("\"fr\"") ? Language.Fr : Language.None);
+            LanguageList.Add(languages.Contains("\"de\"") ? Language.De : Language.None);
+            LanguageList.Add(languages.Contains("\"it\"") ? Language.It : Language.None);
+            LanguageList.Add(languages.Contains("\"pt\"") ? Language.Pt : Language.None);
+            LanguageList.Add(languages.Contains("\"ru\"") ? Language.Ru : Language.None);
+            LanguageList.Add(languages.Contains("\"es\"") ? Language.Es : Language.None);
             LanguageList.RemoveAll(a=>a.Equals(Language.None));
         }
 
