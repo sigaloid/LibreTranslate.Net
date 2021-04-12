@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Text.Json;
 
@@ -16,8 +15,7 @@ namespace LibreTranslate.Net
         It, //Italian
         Pt, //Portuguese
         Ru, //Russian
-        Es, //Spanish
-        None //Placeholder
+        Es //Spanish
     }
 
     public class Translate
@@ -25,37 +23,53 @@ namespace LibreTranslate.Net
         public Translate()
         {
             wc = new WebClient();
-            LanguageList = new List<Language>() {Language.None};
+            LanguageList = new List<Language>();
             Url = "https://libretranslate.com";
             var languages = wc.DownloadString("https://libretranslate.com/languages");
-            LanguageList.Add(languages.Contains("\"en\"") ? Language.En : Language.None);
-            LanguageList.Add(languages.Contains("\"ar\"") ? Language.Ar : Language.None);
-            LanguageList.Add(languages.Contains("\"zh\"") ? Language.Zh : Language.None);
-            LanguageList.Add(languages.Contains("\"fr\"") ? Language.Fr : Language.None);
-            LanguageList.Add(languages.Contains("\"de\"") ? Language.De : Language.None);
-            LanguageList.Add(languages.Contains("\"it\"") ? Language.It : Language.None);
-            LanguageList.Add(languages.Contains("\"pt\"") ? Language.Pt : Language.None);
-            LanguageList.Add(languages.Contains("\"ru\"") ? Language.Ru : Language.None);
-            LanguageList.Add(languages.Contains("\"es\"") ? Language.Es : Language.None);
-            LanguageList.RemoveAll(a=>a.Equals(Language.None)); //just in case
+            if (languages.Contains("\"en\""))
+                LanguageList.Add(Language.En);
+            if (languages.Contains("\"ar\""))
+                LanguageList.Add(Language.Ar);
+            if (languages.Contains("\"zh\""))
+                LanguageList.Add(Language.Zh);
+            if (languages.Contains("\"fr\""))
+                LanguageList.Add(Language.Fr);
+            if (languages.Contains("\"de\""))
+                LanguageList.Add(Language.De);
+            if (languages.Contains("\"it\""))
+                LanguageList.Add(Language.It);
+            if (languages.Contains("\"pt\""))
+                LanguageList.Add(Language.Pt);
+            if (languages.Contains("\"ru\""))
+                LanguageList.Add(Language.Ru);
+            if (languages.Contains("\"es\""))
+                LanguageList.Add(Language.Es);
         }
 
         public Translate(string url)
         {
             wc = new WebClient();
-            LanguageList = new List<Language>() {Language.None};
+            LanguageList = new List<Language>();
             Url = url;
             var languages = wc.DownloadString($"{url}/languages");
-            LanguageList.Add(languages.Contains("\"en\"") ? Language.En : Language.None);
-            LanguageList.Add(languages.Contains("\"ar\"") ? Language.Ar : Language.None);
-            LanguageList.Add(languages.Contains("\"zh\"") ? Language.Zh : Language.None);
-            LanguageList.Add(languages.Contains("\"fr\"") ? Language.Fr : Language.None);
-            LanguageList.Add(languages.Contains("\"de\"") ? Language.De : Language.None);
-            LanguageList.Add(languages.Contains("\"it\"") ? Language.It : Language.None);
-            LanguageList.Add(languages.Contains("\"pt\"") ? Language.Pt : Language.None);
-            LanguageList.Add(languages.Contains("\"ru\"") ? Language.Ru : Language.None);
-            LanguageList.Add(languages.Contains("\"es\"") ? Language.Es : Language.None);
-            LanguageList.RemoveAll(a=>a.Equals(Language.None));
+            if (languages.Contains("\"en\""))
+                LanguageList.Add(Language.En);
+            if (languages.Contains("\"ar\""))
+                LanguageList.Add(Language.Ar);
+            if (languages.Contains("\"zh\""))
+                LanguageList.Add(Language.Zh);
+            if (languages.Contains("\"fr\""))
+                LanguageList.Add(Language.Fr);
+            if (languages.Contains("\"de\""))
+                LanguageList.Add(Language.De);
+            if (languages.Contains("\"it\""))
+                LanguageList.Add(Language.It);
+            if (languages.Contains("\"pt\""))
+                LanguageList.Add(Language.Pt);
+            if (languages.Contains("\"ru\""))
+                LanguageList.Add(Language.Ru);
+            if (languages.Contains("\"es\""))
+                LanguageList.Add(Language.Es);
         }
 
         private WebClient wc { get; }
@@ -64,13 +78,11 @@ namespace LibreTranslate.Net
 
         public string TranslateText(Language fromLang, Language toLang, string text)
         {
-            if (fromLang == Language.None || toLang == Language.None)
+            if (!LanguageList.Contains(fromLang) ||
+                !LanguageList.Contains(toLang)) //if server doesn't support either language
                 throw new Exception(
-                    "These language structs are not to be used! Take out \"Language.None\" from your code! ");
-            if (!LanguageList.Contains(fromLang) || !LanguageList.Contains(toLang)
-            ) //if server doesn't support either language
-                throw new Exception($"Server doesn't support this language! {string.Join(',',LanguageList.ToArray())}");
-            
+                    $"Server doesn't support this language! {string.Join(',', LanguageList.ToArray())}");
+
             var data =
                 $"q={Uri.EscapeDataString(text)}&source={fromLang.ToString().ToLower()}&target={toLang.ToString().ToLower()}";
             wc.Headers.Add("Content-Type: application/x-www-form-urlencoded");
