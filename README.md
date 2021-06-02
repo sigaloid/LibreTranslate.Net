@@ -1,5 +1,5 @@
 # LibreTranslate.Net
-## C# translation library using LibreTranslate
+## C# translation library using LibreTranslate for .Net
 <p>
 	<a href="https://www.nuget.org/packages/LibreTranslate.Net">
 	    <img src="https://buildstats.info/nuget/LibreTranslate.Net?v=1.0.0" />
