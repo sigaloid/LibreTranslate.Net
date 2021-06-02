@@ -17,8 +17,14 @@ using LibreTranslate.Net;
 var LibreTranslate = new LibreTranslate();
 System.Collections.Generic.IEnumerable<SupportedLanguages> SupportedLanguages = await LibreTranslate.GetSupportedLanguagesAsync();
 System.Console.WriteLine(Newtonsoft.Json.JsonConvert.SerializeObject(supportedLanguages, Newtonsoft.Json.Formatting.Indented));
-string text = await LibreTranslate.TranslateAsync(LanguageCode.English, LanguageCode.Spanish, "Hello World!"); //English->Spanish
-System.Console.WriteLine(text);
+var englishText = "Hello World!";
+string spanishText = await LibreTranslate.TranslateAsync(new Translate() {
+    ApiKey = "MySecretApiKey",
+    Source = LanguageCode.English,
+    Target = LanguageCode.Spanish,
+    Text = englishText
+});
+System.Console.WriteLine(spanishText);
 ```
 ### Output:
 ```
@@ -32,7 +38,7 @@ var LibreTranslate = new LibreTranslate("https://server_url");
 ### LibreTranslate Methods
 ```csharp
 Task<IEnumerable<SupportedLanguages>> GetSupportedLanguagesAsync();
-Task<string> TranslateAsync(LanguageCode fromLang, LanguageCode toLang, string text)
+Task<string> TranslateAsync(Translate translate);
 ```
 ### Language codes
 Language|Code
