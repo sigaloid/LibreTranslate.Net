@@ -6,14 +6,17 @@ namespace LibreTranslate.Net.Cmd
     {
         static void Main(string[] args)
         {
-            new Action(async () =>
-            {
-                var libreTranslate = new LibreTranslate();
-                var english = "Hello World!";
-                libreTranslate.TranslateAsync(LanguageCode.English, LanguageCode.Spanish, english).Wait();
-                //Console.WriteLine(spanish.Equals("¡Hola Mundo!"));
-                Console.ReadLine();
-            }).Invoke();
+            var libreTranslate = new LibreTranslate();
+            var english = "Hello World!";
+            var getSupportedLanguagesAsyncTask = libreTranslate.GetSupportedLanguagesAsync();
+            System.Threading.Tasks.Task.Run(() => getSupportedLanguagesAsyncTask).Wait();
+            var supportedLanguages = getSupportedLanguagesAsyncTask.Result;
+            Console.WriteLine(Newtonsoft.Json.JsonConvert.SerializeObject(supportedLanguages, Newtonsoft.Json.Formatting.Indented));
+            var TranslateAsyncTask = libreTranslate.TranslateAsync(LanguageCode.English, LanguageCode.Spanish, english);
+            System.Threading.Tasks.Task.Run(() => TranslateAsyncTask).Wait();
+            var translate = TranslateAsyncTask.Result;
+            Console.WriteLine(translate);
+            Console.ReadLine();;
         }
     }
 }
