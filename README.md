@@ -1,38 +1,59 @@
 # LibreTranslate.Net
-## C# translation library
+## C# translation library using LibreTranslate
+<p>
+	<a href="https://www.nuget.org/packages/LibreTranslate.Net">
+	    <img src="https://buildstats.info/nuget/LibreTranslate.Net?v=1.0.0" />
+	</a>
+</p>
+
 ### Installation
-
-Clone repo, build, add reference to project. Looking for Nuget maintainer, as I don't have a Microsoft account.
-
+`Install-Package LibreTranslate.Net -Version 1.0.0`
+### Using
+```csharp
+using LibreTranslate.Net;
+```
 ### Usage
 ```csharp
-using System;
-using LibreTranslate.Net;
-...
-
-Console.WriteLine("Hello World!");
-var translate = new Translate();
-string text = translate.TranslateText(Language.En, Language.Es, "Hello World!"); //English->Spanish
-Console.WriteLine(text);
+var LibreTranslate = new LibreTranslate();
+System.Collections.Generic.IEnumerable<SupportedLanguages> SupportedLanguages = await LibreTranslate.GetSupportedLanguagesAsync();
+System.Console.WriteLine(Newtonsoft.Json.JsonConvert.SerializeObject(supportedLanguages, Newtonsoft.Json.Formatting.Indented));
+var englishText = "Hello World!";
+string spanishText = await LibreTranslate.TranslateAsync(new Translate() {
+    ApiKey = "MySecretApiKey",
+    Source = LanguageCode.English,
+    Target = LanguageCode.Spanish,
+    Text = englishText
+});
+System.Console.WriteLine(spanishText);
 ```
-Output:
+### Output:
 ```
 Hello World!
 ¡Hola Mundo!
 ```
-Custom LibreTranslate URL (style: `http[s]://url` with no trailing `/`):
+### Custom LibreTranslate URL (style: `http[s]://url` with no trailing `/`):
 ```csharp
-var translate = new Translate("https://server_url");
+var LibreTranslate = new LibreTranslate("https://server_url");
+```
+### LibreTranslate Methods
+```csharp
+Task<IEnumerable<SupportedLanguages>> GetSupportedLanguagesAsync();
+Task<string> TranslateAsync(Translate translate);
 ```
 ### Language codes
-Language|Struct
+Language|Code
 -|-
-English|`Language.En`
-Arabic|`Language.Ar`
-Chinese|`Language.Zh`
-French|`Language.Fr`
-German|`Language.De`
-Italian|`Language.It`
-Portuguese|`Language.Pt`
-Russian|`Language.Ru`
-Spanish|`Language.Es`
+English|`LanguageCode.English`
+Arabic|`LanguageCode.Arabic`
+Chinese|`LanguageCode.Chinese`
+French|`LanguageCode.French`
+German|`LanguageCode.German`
+Hindi|`LanguageCode.Hindi`
+Irish|`LanguageCode.Irish`
+Italian|`LanguageCode.Italian`
+Japanese|`LanguageCode.Japanese`
+Korean|`LanguageCodeKorean`
+Portuguese|`LanguageCode.Portuguese`
+Russian|`LanguageCode.Russian`
+Spanish|`LanguageCode.Spanish`
+AutoDetect|`LanguageCode.AutoDetect //This feature is experimental`
