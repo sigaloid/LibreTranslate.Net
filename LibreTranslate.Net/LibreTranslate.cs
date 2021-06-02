@@ -49,13 +49,14 @@ namespace LibreTranslate.Net
         /// <param name="toLang"></param>
         /// <param name="text"></param>
         /// <returns></returns>
-        public async Task<string> TranslateAsync(LanguageCode fromLang, LanguageCode toLang, string text)
+        public async Task<string> TranslateAsync(Translate translate)
         {
             var formUrlEncodedContent = new FormUrlEncodedContent(new Dictionary<string, string>()
             {
-                { "q", text },
-                { "source", fromLang.ToString() },
-                { "target", toLang.ToString() }
+                { "q", translate.Text },
+                { "source", translate.Source.ToString() },
+                { "target", translate.Target.ToString() },
+                { "api_key", translate.ApiKey }
             });
             var response = await HttpClient.SendAsync(new HttpRequestMessage(HttpMethod.Post, "/translate")
             {

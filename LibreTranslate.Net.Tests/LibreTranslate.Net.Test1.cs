@@ -13,9 +13,17 @@ namespace LibreTranslate.Net.Tests
         public void Test1()
         {
             var libreTranslate = new LibreTranslate();
-            var english = "Hello World!";
-            var spanish = libreTranslate.TranslateAsync(LanguageCode.English, LanguageCode.Spanish, english);
-            Assert.AreEqual(spanish, "¡Hola Mundo!");
+            var englishText = "Hello World!";
+            var TranslateAsyncTask = libreTranslate.TranslateAsync(new Translate()
+            {
+                ApiKey = "MySecretApiKey",
+                Source = LanguageCode.English,
+                Target = LanguageCode.Spanish,
+                Text = englishText
+            });
+            System.Threading.Tasks.Task.Run(() => TranslateAsyncTask).Wait();
+            var spanishText = TranslateAsyncTask.Result;
+            Assert.AreEqual(spanishText, "¡Hola Mundo!");
 
             //Assert.True(translate.SupportedLanguages().Contains(LanguageCode.En));
             //Assert.True(translate.SupportedLanguages().Contains(LanguageCode.Ar));

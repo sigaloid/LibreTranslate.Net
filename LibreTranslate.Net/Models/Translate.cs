@@ -10,7 +10,7 @@ namespace LibreTranslate.Net
         /// The text to be translated
         /// </summary>
         [JsonProperty("q")]
-        public string Q { get; set; }
+        public string Text { get; set; }
         /// <summary>
         /// The source of the current language text
         /// </summary>
@@ -21,5 +21,10 @@ namespace LibreTranslate.Net
         /// </summary>
         [JsonProperty("target")]
         public LanguageCode Target { get; set; }
+        /// <summary>
+        /// The libre translate api key
+        /// </summary>
+        [JsonProperty("api_key")]
+        public string ApiKey { get; set; }
     }
 }
