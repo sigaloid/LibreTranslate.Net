@@ -52,7 +52,7 @@ Hindi|`LanguageCode.Hindi`
 Irish|`LanguageCode.Irish`
 Italian|`LanguageCode.Italian`
 Japanese|`LanguageCode.Japanese`
-Korean|`LanguageCodeKorean`
+Korean|`LanguageCode.Korean`
 Portuguese|`LanguageCode.Portuguese`
 Russian|`LanguageCode.Russian`
 Spanish|`LanguageCode.Spanish`
