@@ -18,8 +18,7 @@ namespace LibreTranslate.Net
         {
             HttpClient = new HttpClient()
             {
-                BaseAddress = new Uri("https://libretranslate.com"),
-                Timeout = System.Threading.Timeout.InfiniteTimeSpan
+                BaseAddress = new Uri("https://libretranslate.com")
             };
         }
         /// <summary>
@@ -30,8 +29,7 @@ namespace LibreTranslate.Net
         {
             HttpClient = new HttpClient()
             {
-                BaseAddress = new Uri(url),
-                Timeout = System.Threading.Timeout.InfiniteTimeSpan
+                BaseAddress = new Uri(url)
             };
         }
         /// <summary>
