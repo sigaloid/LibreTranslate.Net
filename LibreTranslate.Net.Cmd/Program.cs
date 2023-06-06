@@ -17,7 +17,7 @@ namespace LibreTranslate.Net.Cmd
                 ApiKey = "YourSecretKey",
                 Source = LanguageCode.English,
                 Target = LanguageCode.Spanish,
-                Format = Format.HTML,
+                Format = Format.HTML, //Format is optional with 'Format.Text' as default value.
                 Text = englishText
             });
             System.Threading.Tasks.Task.Run(() => TranslateAsyncTask).Wait();
