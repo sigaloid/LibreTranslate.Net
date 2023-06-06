@@ -17,7 +17,7 @@ using LibreTranslate.Net;
 var libreTranslate = new LibreTranslate();
 
 //Get supported languages
-System.Collections.Generic.IEnumerable<SupportedLanguages> SupportedLanguages = await LibreTranslate.GetSupportedLanguagesAsync();
+System.Collections.Generic.IEnumerable<SupportedLanguages> SupportedLanguages = await libreTranslate.GetSupportedLanguagesAsync();
 System.Console.WriteLine(Newtonsoft.Json.JsonConvert.SerializeObject(supportedLanguages, Newtonsoft.Json.Formatting.Indented));
 
 //text translation
