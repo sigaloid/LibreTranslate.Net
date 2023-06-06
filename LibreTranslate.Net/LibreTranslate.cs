@@ -54,7 +54,8 @@ namespace LibreTranslate.Net
                 { "q", translate.Text },
                 { "source", translate.Source.ToString() },
                 { "target", translate.Target.ToString() },
-                { "api_key", translate.ApiKey }
+                { "format", translate.Format?.ToString() ?? Format.Text.ToString() },
+                { "api_key", translate.ApiKey },
             });
             var response = await HttpClient.SendAsync(new HttpRequestMessage(HttpMethod.Post, "/translate")
             {

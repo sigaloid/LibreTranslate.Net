@@ -22,6 +22,12 @@ namespace LibreTranslate.Net
         [JsonProperty("target")]
         public LanguageCode Target { get; set; }
         /// <summary>
+        /// [optional]
+        /// The current format of the text to be translated 
+        /// </summary>
+        [JsonProperty("format")]
+        public Format Format { get; set; }
+        /// <summary>
         /// The libre translate api key
         /// </summary>
         [JsonProperty("api_key")]
