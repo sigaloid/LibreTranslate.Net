@@ -14,22 +14,38 @@ using LibreTranslate.Net;
 ```
 ### Usage
 ```csharp
-var LibreTranslate = new LibreTranslate();
+var libreTranslate = new LibreTranslate();
+
+//Get supported languages
 System.Collections.Generic.IEnumerable<SupportedLanguages> SupportedLanguages = await LibreTranslate.GetSupportedLanguagesAsync();
 System.Console.WriteLine(Newtonsoft.Json.JsonConvert.SerializeObject(supportedLanguages, Newtonsoft.Json.Formatting.Indented));
+
+//text translation
 var englishText = "Hello World!";
-string spanishText = await LibreTranslate.TranslateAsync(new Translate() {
+string spanishText = await libreTranslate.TranslateAsync(new Translate() {
     ApiKey = "MySecretApiKey",
     Source = LanguageCode.English,
     Target = LanguageCode.Spanish,
     Text = englishText
 });
 System.Console.WriteLine(spanishText);
+
+//html translation
+var englishHtml = "<p>Hello World!</p>";
+string spanishHtml = await libreTranslate.TranslateAsync(new Translate() {
+    ApiKey = "MySecretApiKey",
+    Source = LanguageCode.English,
+    Target = LanguageCode.Spanish,
+    Format = Format.HTML,
+    Text = englishHtml
+});
+System.Console.WriteLine(spanishHtml);
 ```
 ### Output:
 ```
 Hello World!
 ¡Hola Mundo!
+<p>¡Hola Mundo!</p>
 ```
 ### Custom LibreTranslate URL (style: `http[s]://url` with no trailing `/`):
 ```csharp
