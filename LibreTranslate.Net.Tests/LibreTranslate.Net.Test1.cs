@@ -42,7 +42,7 @@ namespace LibreTranslate.Net.Tests
         [Test]
         public void Test2()
         {
-            var libreTranslate = new LibreTranslate("https://translate.rinderha.cc");
+            var libreTranslate = new LibreTranslate();
             var englishText = "Hello World!";
             var tokenSource = new CancellationTokenSource();
             Task.Run(() => InnerTestAsyncDecouple());
