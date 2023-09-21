@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 namespace LibreTranslate.Net
@@ -47,7 +48,15 @@ namespace LibreTranslate.Net
         /// <param name="toLang"></param>
         /// <param name="text"></param>
         /// <returns></returns>
-        public async Task<string> TranslateAsync(Translate translate)
+        public async Task<string> TranslateAsync(Translate translate) => await TranslateAsync(translate, CancellationToken.None);
+        /// <summary>
+        /// Translates the text from one language to another. Can be cancelled by providing CancellationToken.
+        /// </summary>
+        /// <param name="fromLang"></param>
+        /// <param name="toLang"></param>
+        /// <param name="text"></param>
+        /// <returns></returns>
+        public async Task<string> TranslateAsync(Translate translate, CancellationToken cancellationToken)
         {
             var formUrlEncodedContent = new FormUrlEncodedContent(new Dictionary<string, string>()
             {
@@ -59,12 +68,15 @@ namespace LibreTranslate.Net
             var response = await HttpClient.SendAsync(new HttpRequestMessage(HttpMethod.Post, "/translate")
             {
                 Content = formUrlEncodedContent
-            });
+            },
+            cancellationToken);
             if (response.IsSuccessStatusCode)
             {
                 var translatedText = JsonConvert.DeserializeObject<TranslationResponse>(await response.Content.ReadAsStringAsync());
+                cancellationToken.ThrowIfCancellationRequested();
                 return translatedText.TranslatedText;
             }
+            cancellationToken.ThrowIfCancellationRequested();
             return default;
         }
     }
