@@ -14,7 +14,7 @@ namespace LibreTranslate.Net.Tests
         [Test]
         public void Test1()
         {
-            var libreTranslate = new LibreTranslate("https://translate.rinderha.cc");
+            var libreTranslate = new LibreTranslate();
             var englishText = "Hello World!";
             var TranslateAsyncTask = libreTranslate.TranslateAsync(new Translate()
             {
