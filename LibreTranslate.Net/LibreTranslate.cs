@@ -100,7 +100,7 @@ namespace LibreTranslate.Net
             return response.FirstOrDefault()?.Language;
         }
 
-        public async Task<TranslationResponse> TranslateFile(TranslateFile translateFile)
+        public async Task<TranslationResponse> TranslateFileAsync(TranslateFile translateFile)
         {
             
             var fileBytes = File.ReadAllBytes(translateFile.File);
@@ -117,15 +117,6 @@ namespace LibreTranslate.Net
             multipart.Add(new StringContent(translateFile.Target.ToString()), "target");
             multipart.Add(new StringContent(translateFile.ApiKey), "api_key");
             multipart.Add(fileContent);
-           /* var request = new FormUrlEncodedContent(new Dictionary<string, string>()
-            {
-                { "source", translateFile.Source.ToString() },
-                { "target", translateFile.Target.ToString() },
-                { "api_key", translateFile.ApiKey },
-                { "file", File.ReadAllText(translateFile.File) }
-            });
-            */
-
             
             var response = await HttpClient.PostAsync("/translate_file", multipart);
             if (response.IsSuccessStatusCode)
@@ -136,7 +127,7 @@ namespace LibreTranslate.Net
             return default;
         }
 
-        public async Task<FrontendSettingsResponse> FrontendSettings()
+        public async Task<FrontendSettingsResponse> FrontendSettingsAsync()
         {
             var response = await HttpClient.GetAsync("/frontend/settings");
             if (response.IsSuccessStatusCode)
@@ -146,6 +137,20 @@ namespace LibreTranslate.Net
             }
 
             return default;
+        }
+
+        public async Task<bool> SuggestAsync(Suggestion suggestion)
+        {
+            var urlEncoded = new FormUrlEncodedContent(new Dictionary<string, string>()
+            {
+                { "q", suggestion.SourceText },
+                { "s", suggestion.TargetText },
+                { "source", suggestion.Source },
+                { "target", suggestion.Target }
+            });
+            var response = await HttpClient.PostAsync("/suggest", urlEncoded);
+            var result = JsonConvert.DeserializeObject<SuggestionResponse>(await response.Content.ReadAsStringAsync());
+            return result.Success;
         }
     }
 }
