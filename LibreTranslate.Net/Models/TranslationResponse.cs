@@ -11,5 +11,9 @@ namespace LibreTranslate.Net
         /// </summary>
         [JsonProperty("translatedText")]
         public string TranslatedText { get; set; }
+        [JsonProperty("error")]
+        public string Error { get; set; }
+        [JsonProperty("translatedFileUrl")] 
+        public string TranslatedFileUrl { get; set; }
     }
 }

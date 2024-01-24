@@ -16,4 +16,11 @@
       <ProjectReference Include="..\LibreTranslate.Net\LibreTranslate.Net.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <None Remove="textfile.txt" />
+      <Content Include="textfile.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+    </ItemGroup>
+
 </Project>

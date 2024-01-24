@@ -26,5 +26,10 @@ namespace LibreTranslate.Net
         /// </summary>
         [JsonProperty("api_key")]
         public string ApiKey { get; set; }
+        /// <summary>
+        /// Indicates whether the q payload is plain text or Html
+        /// </summary>
+        [JsonProperty("format")] 
+        public TextFormat Format { get; set; }
     }
 }
