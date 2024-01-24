@@ -43,7 +43,7 @@ namespace LibreTranslate.Net.Tests
         [Test]
         public void TestFrontendSettings()
         {
-            var frontendSettings = _libreTranslate.FrontendSettings().GetAwaiter().GetResult();
+            var frontendSettings = _libreTranslate.FrontendSettingsAsync().GetAwaiter().GetResult();
             Assert.NotNull(frontendSettings.CharLimit);
         }
 
@@ -57,7 +57,7 @@ namespace LibreTranslate.Net.Tests
                 Target = LanguageCode.Spanish,
                 File = "textfile.txt"
             };
-            var result = _libreTranslate.TranslateFile(translateFileRequest).GetAwaiter().GetResult();
+            var result = _libreTranslate.TranslateFileAsync(translateFileRequest).GetAwaiter().GetResult();
             Assert.Null(result.Error);
             Assert.NotNull(result.TranslatedFileUrl);
         }
