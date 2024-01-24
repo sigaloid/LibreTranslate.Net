@@ -12,9 +12,10 @@
         <PackageProjectUrl>https://github.com/sigaloid/LibreTranslate.Net</PackageProjectUrl>
         <RepositoryUrl>https://github.com/sigaloid/LibreTranslate.Net</RepositoryUrl>
         <RepositoryType>c#</RepositoryType>
-        <PackageReleaseNotes>Removed Timeout = System.Threading.Timeout.InfiniteTimeSpan</PackageReleaseNotes>
-        <Version>1.0.1</Version>
-        <AssemblyVersion>1.0.1.0</AssemblyVersion>
+        <PackageReleaseNotes>Bump .NET standard version to 2.0
+Added support for more endpoints</PackageReleaseNotes>
+        <Version>1.5.5</Version>
+        <AssemblyVersion>1.5.5</AssemblyVersion>
     </PropertyGroup>
 
     <ItemGroup>
