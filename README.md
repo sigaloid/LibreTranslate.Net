@@ -1,5 +1,4 @@
-@@ -1,59 +0,0 @@
-﻿# LibreTranslate.Net.Enhanced
+# LibreTranslate.Net.Enhanced
 ## An enhanced fork of LibreTranslate.Net
 <p>
 	<a href="https://www.nuget.org/packages/LibreTranslate.Net.Enhanced">
