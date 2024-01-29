@@ -7,6 +7,7 @@ namespace LibreTranslate.Net.Enhanced.Models
     /// </summary>
     public class TranslationResponse
     {
+        internal TranslationResponse() {}
         /// <summary>
         /// The translated text
         /// </summary>

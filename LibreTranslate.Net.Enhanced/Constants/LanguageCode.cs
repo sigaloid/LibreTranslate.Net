@@ -31,6 +31,7 @@ namespace LibreTranslate.Net.Enhanced.Constants
             if (culture != null)
             {
                 Instance[str] = new LanguageCode(str);
+                return Instance[str];
             }
 
             throw new InvalidCastException();

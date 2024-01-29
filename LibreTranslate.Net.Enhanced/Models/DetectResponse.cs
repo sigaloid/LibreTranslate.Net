@@ -4,6 +4,7 @@ namespace LibreTranslate.Net.Enhanced.Models
 {
     public class DetectResponse
     {
+        internal DetectResponse() {}
         [JsonProperty("confidence")]
         public double? Confidence { get; set; }
         [JsonProperty("language")]

@@ -5,6 +5,7 @@ namespace LibreTranslate.Net.Enhanced.Models
 {
     public class FrontendSettingsResponse
     {
+        internal FrontendSettingsResponse() {}
         [JsonProperty("api_keys")]
         public bool ApiKeys { get; set; }
 

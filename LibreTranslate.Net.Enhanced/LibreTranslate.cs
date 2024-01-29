@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
@@ -70,12 +71,14 @@ namespace LibreTranslate.Net.Enhanced
             {
                 Content = formUrlEncodedContent
             });
+            var translatedText = JsonConvert.DeserializeObject<TranslationResponse>(await response.Content.ReadAsStringAsync());
             if (response.IsSuccessStatusCode)
             {
-                var translatedText = JsonConvert.DeserializeObject<TranslationResponse>(await response.Content.ReadAsStringAsync());
+                
                 return translatedText.TranslatedText;
             }
-            return default;
+            
+            return translatedText.Error;
         }
 
         public async Task<List<DetectResponse>> DetectAsync(Detect detect)
@@ -86,13 +89,21 @@ namespace LibreTranslate.Net.Enhanced
                 { "api_key", detect.ApiKey }
             });
             var response = await _httpClient.PostAsync("/detect", formUrlEncodedContent);
-            if (!response.IsSuccessStatusCode)
+            var detectResponse = new List<DetectResponse>();
+            if (response.IsSuccessStatusCode || response.StatusCode == HttpStatusCode.BadRequest)
             {
-                return default;
+                detectResponse = JsonConvert.DeserializeObject<List<DetectResponse>>(await response.Content.ReadAsStringAsync());
+            }
+            else
+            {
+                var errorMessage = await response.Content.ReadAsStringAsync();
+                var errorResponse = new DetectResponse()
+                {
+                    Error = $"An unknown error has occurred: {errorMessage}"
+                };
+                detectResponse.Add(errorResponse);
             }
 
-            var detectResponse =
-                JsonConvert.DeserializeObject<List<DetectResponse>>(await response.Content.ReadAsStringAsync());
             return detectResponse;
         }
 
@@ -121,12 +132,23 @@ namespace LibreTranslate.Net.Enhanced
             multipart.Add(fileContent);
             
             var response = await _httpClient.PostAsync("/translate_file", multipart);
-            if (response.IsSuccessStatusCode)
+            var allowedStatusCodes = new int[]
+            {
+                (int)HttpStatusCode.BadRequest,
+                (int)HttpStatusCode.Forbidden,
+                429, // TooManyRequests is not supported in .NET Standard 2.0,
+                (int)HttpStatusCode.InternalServerError
+            };
+            if (response.IsSuccessStatusCode || allowedStatusCodes.Contains((int)response.StatusCode))
             {
                 return JsonConvert.DeserializeObject<TranslationResponse>(await response.Content.ReadAsStringAsync());
             }
 
-            return default;
+            var errorMessage = await response.Content.ReadAsStringAsync();
+            return new TranslationResponse()
+            {
+                Error = $"Unknown error {errorMessage}"
+            };
         }
 
         public async Task<FrontendSettingsResponse> FrontendSettingsAsync()
