@@ -4,18 +4,18 @@
         <TargetFramework>netstandard2.0</TargetFramework>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-        <Authors>sigaloid</Authors>
-        <Description>Translation library using LibreTranslate for .Net</Description>
+        <Authors>Andrea Luciano Damico</Authors>
+        <Description>Enhanced translation library using LibreTranslate for .Net</Description>
         <Company />
-        <Copyright>sigaloid</Copyright>
+        <Copyright>Andrea Luciano Damico</Copyright>
         <PackageLicenseFile>LICENSE</PackageLicenseFile>
-        <PackageProjectUrl>https://github.com/sigaloid/LibreTranslate.Net</PackageProjectUrl>
+        <PackageProjectUrl>https://github.com/ALDamico/LibreTranslate.Net.Enhanced</PackageProjectUrl>
         <RepositoryUrl>https://github.com/sigaloid/LibreTranslate.Net</RepositoryUrl>
         <RepositoryType>c#</RepositoryType>
         <PackageReleaseNotes>Bump .NET standard version to 2.0
 Added support for more endpoints</PackageReleaseNotes>
-        <Version>1.5.5</Version>
-        <AssemblyVersion>1.5.5</AssemblyVersion>
+        <Version>1.5.6</Version>
+        <AssemblyVersion>1.5.6</AssemblyVersion>
     </PropertyGroup>
 
     <ItemGroup>
