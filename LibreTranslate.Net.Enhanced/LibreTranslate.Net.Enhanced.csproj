@@ -12,10 +12,10 @@
         <PackageProjectUrl>https://github.com/ALDamico/LibreTranslate.Net.Enhanced</PackageProjectUrl>
         <RepositoryUrl>https://github.com/sigaloid/LibreTranslate.Net</RepositoryUrl>
         <RepositoryType>c#</RepositoryType>
-        <PackageReleaseNotes>Bump .NET standard version to 2.0
-Added support for more endpoints</PackageReleaseNotes>
-        <Version>1.5.6</Version>
-        <AssemblyVersion>1.5.6</AssemblyVersion>
+        <PackageReleaseNotes>Fixed LanguageCode bug
+Handled error responses</PackageReleaseNotes>
+        <Version>1.5.7</Version>
+        <AssemblyVersion>1.5.7</AssemblyVersion>
     </PropertyGroup>
 
     <ItemGroup>
