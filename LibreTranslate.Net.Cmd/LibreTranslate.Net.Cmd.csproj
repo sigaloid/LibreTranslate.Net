@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\LibreTranslate.Net\LibreTranslate.Net.csproj" />
+    <ProjectReference Include="..\LibreTranslate.Net.Enhanced\LibreTranslate.Net.Enhanced.csproj" />
   </ItemGroup>
 
 </Project>

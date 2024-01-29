@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace LibreTranslate.Net
+namespace LibreTranslate.Net.Enhanced.Models
 {
     public class SuggestionResponse
     {

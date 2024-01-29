@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace LibreTranslate.Net
+namespace LibreTranslate.Net.Enhanced.Constants
 {
     public class TextFormat
     {

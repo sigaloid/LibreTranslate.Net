@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-namespace LibreTranslate.Net
+using System.Globalization;
+using System.Linq;
+
+namespace LibreTranslate.Net.Enhanced.Constants
 {
     /// <summary>
     /// The language codes that are supported in the libre translate server
@@ -8,31 +11,36 @@ namespace LibreTranslate.Net
     public class LanguageCode
     {
         private static readonly Dictionary<string, LanguageCode> Instance = new Dictionary<string, LanguageCode>();
-        private readonly string Code;
+        private readonly string _code;
+
         private LanguageCode(string code)
         {
-            Code = code;
-            Instance[Code] = this;
+            _code = code;
+            Instance[_code] = this;
         }
+
         public static implicit operator LanguageCode(string str)
         {
-            return $"{FromString(str)}";
-        }
-        public static LanguageCode FromString(string str)
-        {
-            if (Instance.TryGetValue(str, out LanguageCode result))
+            if (Instance.TryGetValue(str, out var result))
             {
                 return result;
             }
-            else
+
+            var culture = CultureInfo.GetCultures(CultureTypes.SpecificCultures).FirstOrDefault(c =>
+                c.TwoLetterISOLanguageName.Equals(str, StringComparison.InvariantCultureIgnoreCase));
+            if (culture != null)
             {
-                throw new ArgumentException($"{nameof(Net.LanguageCode)} must be one of the followings https://github.com/sigaloid/LibreTranslate.Net#language-codes");
+                Instance[str] = new LanguageCode(str);
             }
+
+            throw new InvalidCastException();
         }
+
         public override string ToString()
         {
-            return $"{Code}";
+            return $"{_code}";
         }
+
         public static readonly LanguageCode English = new LanguageCode("en");
         public static readonly LanguageCode Arabic = new LanguageCode("ar");
         public static readonly LanguageCode Chinese = new LanguageCode("zh");

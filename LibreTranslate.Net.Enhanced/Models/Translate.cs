@@ -1,5 +1,7 @@
-﻿using Newtonsoft.Json;
-namespace LibreTranslate.Net
+﻿using LibreTranslate.Net.Enhanced.Constants;
+using Newtonsoft.Json;
+
+namespace LibreTranslate.Net.Enhanced.Models
 {
     /// <summary>
     /// The model to send to the libre translate api

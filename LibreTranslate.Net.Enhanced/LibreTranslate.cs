@@ -2,42 +2,44 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using LibreTranslate.Net.Enhanced.Models;
 using Newtonsoft.Json;
-namespace LibreTranslate.Net
+namespace LibreTranslate.Net.Enhanced
 {
-    public class LibreTranslate
+    public class LibreTranslate : IDisposable
     {
         /// <summary>
         /// The http client
         /// </summary>
-        private readonly HttpClient HttpClient;
+        private readonly HttpClient _httpClient;
 
-        private readonly string ApiKey;
+        private readonly string _apiKey;
         /// <summary>
         /// The default contructor. The default http client base uri points to https://libretranslate.com
         /// </summary>
         public LibreTranslate()
         {
-            HttpClient = new HttpClient()
+            _httpClient = new HttpClient()
             {
                 BaseAddress = new Uri("https://libretranslate.com")
             };
         }
+
         /// <summary>
         /// Contructor which enable to specified the libre translate server api address
         /// </summary>
         /// <param name="url"></param>
+        /// <param name="apiKey"></param>
         public LibreTranslate(string url, string apiKey = null)
         {
-            HttpClient = new HttpClient()
+            _httpClient = new HttpClient()
             {
                 BaseAddress = new Uri(url)
             };
-            ApiKey = apiKey;
+            _apiKey = apiKey;
         }
         /// <summary>
         /// Gets the server supported languages.
@@ -45,18 +47,17 @@ namespace LibreTranslate.Net
         /// <returns></returns>
         public async Task<IEnumerable<SupportedLanguages>> GetSupportedLanguagesAsync()
         {
-            return JsonConvert.DeserializeObject<IEnumerable<SupportedLanguages>>(await HttpClient.GetStringAsync("/languages"));
+            return JsonConvert.DeserializeObject<IEnumerable<SupportedLanguages>>(await _httpClient.GetStringAsync("/languages"));
         }
+
         /// <summary>
         /// Translates the text from one language to another.
         /// </summary>
-        /// <param name="fromLang"></param>
-        /// <param name="toLang"></param>
-        /// <param name="text"></param>
+        /// <param name="translate">Payload for the request</param>
         /// <returns></returns>
         public async Task<string> TranslateAsync(Translate translate)
         {
-            translate.ApiKey = string.IsNullOrWhiteSpace(translate.ApiKey) ? ApiKey : translate.ApiKey;
+            translate.ApiKey = string.IsNullOrWhiteSpace(translate.ApiKey) ? _apiKey : translate.ApiKey;
             var formUrlEncodedContent = new FormUrlEncodedContent(new Dictionary<string, string>()
             {
                 { "q", translate.Text },
@@ -65,7 +66,7 @@ namespace LibreTranslate.Net
                 { "api_key", translate.ApiKey },
                 { "format", translate.Format?.ToString() }
             });
-            var response = await HttpClient.SendAsync(new HttpRequestMessage(HttpMethod.Post, "/translate")
+            var response = await _httpClient.SendAsync(new HttpRequestMessage(HttpMethod.Post, "/translate")
             {
                 Content = formUrlEncodedContent
             });
@@ -84,7 +85,7 @@ namespace LibreTranslate.Net
                 { "q", detect.Text },
                 { "api_key", detect.ApiKey }
             });
-            var response = await HttpClient.PostAsync("/detect", formUrlEncodedContent);
+            var response = await _httpClient.PostAsync("/detect", formUrlEncodedContent);
             if (!response.IsSuccessStatusCode)
             {
                 return default;
@@ -119,7 +120,7 @@ namespace LibreTranslate.Net
             multipart.Add(new StringContent(translateFile.ApiKey), "api_key");
             multipart.Add(fileContent);
             
-            var response = await HttpClient.PostAsync("/translate_file", multipart);
+            var response = await _httpClient.PostAsync("/translate_file", multipart);
             if (response.IsSuccessStatusCode)
             {
                 return JsonConvert.DeserializeObject<TranslationResponse>(await response.Content.ReadAsStringAsync());
@@ -130,7 +131,7 @@ namespace LibreTranslate.Net
 
         public async Task<FrontendSettingsResponse> FrontendSettingsAsync()
         {
-            var response = await HttpClient.GetAsync("/frontend/settings");
+            var response = await _httpClient.GetAsync("/frontend/settings");
             if (response.IsSuccessStatusCode)
             {
                 return JsonConvert.DeserializeObject<FrontendSettingsResponse>(
@@ -149,9 +150,14 @@ namespace LibreTranslate.Net
                 { "source", suggestion.Source },
                 { "target", suggestion.Target }
             });
-            var response = await HttpClient.PostAsync("/suggest", urlEncoded);
+            var response = await _httpClient.PostAsync("/suggest", urlEncoded);
             var result = JsonConvert.DeserializeObject<SuggestionResponse>(await response.Content.ReadAsStringAsync());
             return result.Success;
+        }
+
+        public void Dispose()
+        {
+            _httpClient?.Dispose();
         }
     }
 }

@@ -1,6 +1,7 @@
-﻿using Newtonsoft.Json;
+﻿using LibreTranslate.Net.Enhanced.Constants;
+using Newtonsoft.Json;
 
-namespace LibreTranslate.Net
+namespace LibreTranslate.Net.Enhanced.Models
 {
     public class TranslateFile
     {

@@ -3,11 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31205.134
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LibreTranslate.Net", "LibreTranslate.Net\LibreTranslate.Net.csproj", "{0C8182A9-C9CA-4E30-9854-5CAA3F6591AF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LibreTranslate.Net.Enhanced", "LibreTranslate.Net.Enhanced\LibreTranslate.Net.Enhanced.csproj", "{0C8182A9-C9CA-4E30-9854-5CAA3F6591AF}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LibreTranslate.Net.Tests", "LibreTranslate.Net.Tests\LibreTranslate.Net.Tests.csproj", "{46A5A915-B44B-4076-AC77-8593AE727D45}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibreTranslate.Net.Cmd", "LibreTranslate.Net.Cmd\LibreTranslate.Net.Cmd.csproj", "{C04A56F1-3D20-4B28-A86B-2F2F0501D75D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LibreTranslate.Net.Enhanced.Tests", "LibreTranslate.Net.Enhanced.Tests\LibreTranslate.Net.Enhanced.Tests.csproj", "{46A5A915-B44B-4076-AC77-8593AE727D45}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +21,6 @@ Global
 		{46A5A915-B44B-4076-AC77-8593AE727D45}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{46A5A915-B44B-4076-AC77-8593AE727D45}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{46A5A915-B44B-4076-AC77-8593AE727D45}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C04A56F1-3D20-4B28-A86B-2F2F0501D75D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C04A56F1-3D20-4B28-A86B-2F2F0501D75D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C04A56F1-3D20-4B28-A86B-2F2F0501D75D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C04A56F1-3D20-4B28-A86B-2F2F0501D75D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
