@@ -1,13 +1,14 @@
-# LibreTranslate.Net
-## C# translation library using LibreTranslate for .Net
+@@ -1,59 +0,0 @@
+﻿# LibreTranslate.Net.Enhanced
+## An enhanced fork of LibreTranslate.Net
 <p>
-	<a href="https://www.nuget.org/packages/LibreTranslate.Net">
-	    <img src="https://buildstats.info/nuget/LibreTranslate.Net?v=1.0.1" />
+	<a href="https://www.nuget.org/packages/LibreTranslate.Net.Enhanced">
+	    <img src="https://buildstats.info/nuget/LibreTranslate.Net?v=1.5.5" />
 	</a>
 </p>
 
 ### Installation
-`Install-Package LibreTranslate.Net -Version 1.0.1`
+`Install-Package LibreTranslate.Net.Enhanced -Version 1.5.5`
 ### Using
 ```csharp
 using LibreTranslate.Net;
