@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
-namespace LibreTranslate.Net
+
+namespace LibreTranslate.Net.Enhanced.Models
 {
     /// <summary>
     /// The model for the supported languages api

@@ -1,20 +1,21 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>netstandard1.1</TargetFramework>
+        <TargetFramework>netstandard2.0</TargetFramework>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-        <Authors>sigaloid</Authors>
-        <Description>Translation library using LibreTranslate for .Net</Description>
+        <Authors>Andrea Luciano Damico</Authors>
+        <Description>Enhanced translation library using LibreTranslate for .Net</Description>
         <Company />
-        <Copyright>sigaloid</Copyright>
+        <Copyright>Andrea Luciano Damico</Copyright>
         <PackageLicenseFile>LICENSE</PackageLicenseFile>
-        <PackageProjectUrl>https://github.com/sigaloid/LibreTranslate.Net</PackageProjectUrl>
+        <PackageProjectUrl>https://github.com/ALDamico/LibreTranslate.Net.Enhanced</PackageProjectUrl>
         <RepositoryUrl>https://github.com/sigaloid/LibreTranslate.Net</RepositoryUrl>
         <RepositoryType>c#</RepositoryType>
-        <PackageReleaseNotes>Removed Timeout = System.Threading.Timeout.InfiniteTimeSpan</PackageReleaseNotes>
-        <Version>1.0.1</Version>
-        <AssemblyVersion>1.0.1.0</AssemblyVersion>
+        <PackageReleaseNotes>Fixed LanguageCode bug
+Handled error responses</PackageReleaseNotes>
+        <Version>1.5.7</Version>
+        <AssemblyVersion>1.5.7</AssemblyVersion>
     </PropertyGroup>
 
     <ItemGroup>

@@ -13,7 +13,14 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\LibreTranslate.Net\LibreTranslate.Net.csproj" />
+      <ProjectReference Include="..\LibreTranslate.Net.Enhanced\LibreTranslate.Net.Enhanced.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="textfile.txt" />
+      <Content Include="textfile.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
     </ItemGroup>
 
 </Project>

@@ -1,5 +1,7 @@
-﻿using Newtonsoft.Json;
-namespace LibreTranslate.Net
+﻿using LibreTranslate.Net.Enhanced.Constants;
+using Newtonsoft.Json;
+
+namespace LibreTranslate.Net.Enhanced.Models
 {
     /// <summary>
     /// The model to send to the libre translate api
@@ -26,5 +28,10 @@ namespace LibreTranslate.Net
         /// </summary>
         [JsonProperty("api_key")]
         public string ApiKey { get; set; }
+        /// <summary>
+        /// Indicates whether the q payload is plain text or Html
+        /// </summary>
+        [JsonProperty("format")] 
+        public TextFormat Format { get; set; }
     }
 }
