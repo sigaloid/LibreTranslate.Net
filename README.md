@@ -3,12 +3,12 @@
 ## An enhanced fork of LibreTranslate.Net
 <p>
 	<a href="https://www.nuget.org/packages/LibreTranslate.Net.Enhanced">
-	    <img src="https://buildstats.info/nuget/LibreTranslate.Net?v=1.5.5" />
+	    <img src="https://buildstats.info/nuget/LibreTranslate.Net.Enhanced?v=1.5.6" />
 	</a>
 </p>
 
 ### Installation
-`Install-Package LibreTranslate.Net.Enhanced -Version 1.5.5`
+`Install-Package LibreTranslate.Net.Enhanced -Version 1.5.6`
 ### Using
 ```csharp
 using LibreTranslate.Net;
